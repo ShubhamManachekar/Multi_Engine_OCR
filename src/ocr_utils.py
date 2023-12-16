@@ -1,4 +1,4 @@
-import concurrent
+import concurrent.futures
 import os
 import easyocr
 import pytesseract
@@ -13,7 +13,7 @@ import hashlib
 from src.image_azure_caption import process_image_caption  # Import the image captioning function
 
 # Path to Tesseract executable
-pytesseract.pytesseract.tesseract_cmd = r"D:\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 def generate_unique_name(file_path):
     return hashlib.md5(file_path.encode()).hexdigest()
@@ -117,10 +117,8 @@ def extract_images_from_docx(docx_file):
     os.remove(temp_zip_file)
     return image_dir
 
-def process_images_with_caption(image_dir):
-    image_files = os.listdir(image_dir)
+def process_images_with_caption(image_paths):
     image_captions = []
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        image_paths = [os.path.join(image_dir, image_file) for image_file in image_files]
         image_captions = list(executor.map(process_image_caption, image_paths))
     return image_captions

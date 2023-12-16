@@ -1,4 +1,4 @@
 {
-    "VISION_KEY":,
-    "VISION_ENDPOINT":
+    "VISION_KEY": "dea81527881f452ea118008f6b1fc470",
+    "VISION_ENDPOINT": "https://testcap.cognitiveservices.azure.com/"
 }
